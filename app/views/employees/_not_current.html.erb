@@ -1,0 +1,12 @@
+<div class="col-sm-9" contenteditable="false" style="">
+    <div class="panel panel-default">
+        <div class="panel-heading">activity</div>
+        <div class="panel-body">
+            <% if current_user.is_employee %>
+                <%= "#{current_user.first_name} #{current_user.last_name}" %> has inserted <%= current_user.inserted_cards.where('created_at >:t', t: Time.current - 7.days).count %> during the last week
+            <% else %>
+                <%= "#{current_user.first_name} #{current_user.last_name}" %> has taken <%= current_user.taken_cards.where('created_at >:t', t: Time.current - 7.days).count %> during the last week
+            <% end %>
+        </div>
+    </div>
+</div>

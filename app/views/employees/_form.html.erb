@@ -1,0 +1,44 @@
+
+<% if current_user.is_employee %>
+        <div class="col-sm-9" contenteditable="false" style="">
+            <div class="panel panel-default">
+                <div class="panel-heading">Insert Cards</div>
+                <div class="panel-body">
+                	<%= form_for :card, method: 'post',:url => {:controller =>'cards', :action => 'create' }  do |f|%>
+                        <div class="form-group">
+                            <label for="value">Insert cards value</label><br />
+                            <div class="input-group">
+                                <input type="text" name="value" id="value" class="form-control">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span><br />
+                            </div>
+                            <label for="cards">Insert cards numbers</label><br />
+                            <div class="input-group">
+                                <textarea name="cards" id="cards" class="form-control" rows="10" required= true></textarea>
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                            </div>
+                        </div>
+                        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                    <% end %>
+                </div>
+            </div>
+        </div>
+<% else %>
+        <div class="col-sm-9" contenteditable="false" style="">
+            <div class="panel panel-default">
+                <div class="panel-heading">Take Cards</div>
+                <div class="panel-body">
+                    <%= form_for :card, method: 'post',:url => {:controller =>'cards', :action => 'create' }  do |f|%>
+                        <div class="form-group">
+                            <% Type.all.each do |t| %>
+                                <label for="value-<%= t.id %>">Cards value <%= t.value %></label><br />
+                                <div class="input-group">
+                                    <input type="number" name="<%= t.id %>" id="value-<%= t.id %>" class="form-control">
+                                    <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span><br />
+                                </div>
+                            <% end %>
+                        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                    <% end %>
+                </div>
+            </div>
+        </div>
+<% end %>

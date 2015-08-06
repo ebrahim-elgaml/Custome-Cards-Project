@@ -1,0 +1,33 @@
+<table class="table table-fixed">
+  <thead>
+    <tr>
+      <th class="col-xs-3">#</th> <th class="col-xs-6">Email</th>
+      <th class="col-xs-4">
+        <% if list.first.is_employee %>
+          Total added cards
+        <% else %>
+          Total Taken cards
+        <% end %>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% i = 1 %>
+    <% list.each do |l| %>
+      <tr>
+        <td class="col-xs-3"> <%= i %> </td>
+        <td class="col-xs-6">
+          <% if l.is_employee %>
+            <%= link_to l.email, employee_path(l) %>
+            <td class="col-xs-4"><%= l.inserted_cards.count %></td>
+          <% else %>
+            <%= link_to l.email, client_path(l) %>
+            <td class="col-xs-4"><%= l.taken_cards.count %></td>
+          <% end %>  
+        </td>
+        
+      </tr>
+      <% i += 1 %>
+    <% end %>
+  </tbody>
+</table>
