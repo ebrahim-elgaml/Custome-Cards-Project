@@ -59,8 +59,12 @@
 		</nav>
 		<%if(notice)%>
 			<%if(notice.kind_of?(Array))%>
-				<% notice.each do |n| %>
-					<div class="alert alert-info" role="alert"><%= n %></div>
+				<% if notice.first == "You need to sign in or sign up before continuing." %>
+					<div class="alert alert-info" role="alert"><%= notice.first %></div>
+				<% else %>
+					<% notice.each do |n| %>
+						<div class="alert alert-info" role="alert"><%= n %></div>
+					<% end %>
 				<% end %>
 			<% else %>
 				<div class="alert alert-info" role="alert"><%= notice %></div>
@@ -68,13 +72,16 @@
 	    <% end %>
 	    <%if(alert)%>
 			<%if(alert.kind_of?(Array))%>
-				<% alert.each do |a| %>
-					<div class="alert alert-info" role="alert"><%= a %></div>
+				<% if alert.first.eql? "You need to sign in or sign up before continuing." %>
+					<div class="alert alert-info" role="alert"><%= alert.first %></div>
+				<% else %>
+					<% alert.each do |a| %>
+						<div class="alert alert-info" role="alert"><%= a %></div>
+					<% end %>
 				<% end %>
 			<% else %>
 				<div class="alert alert-info" role="alert"><%= alert %></div>
 	    	<% end %>
-			<div class="alert alert-info" role="alert"><%= alert %></div>
 	    <% end %>
 		<%= yield %>
 
