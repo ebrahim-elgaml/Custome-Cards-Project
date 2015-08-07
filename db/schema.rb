@@ -47,13 +47,13 @@ ActiveRecord::Schema.define(version: 20150806094841) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
 
   create_table "cards", force: :cascade do |t|
-    t.integer  "number",      limit: 16
+    t.integer  "number",      limit: 8
     t.integer  "added_by_id"
     t.integer  "taken_by_id"
     t.integer  "type_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.boolean  "is_taken",               default: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.boolean  "is_taken",              default: false
     t.datetime "taken_at"
   end
 
