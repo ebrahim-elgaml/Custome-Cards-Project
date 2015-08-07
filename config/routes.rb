@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  devise_for :users
+  devise_for :users, :skip => [:registrations]
   root  'employees#show_me'
   resources :employees, only: [:show, :index] 
   resources :clients, only: [:show, :index]

@@ -5,6 +5,7 @@
 	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
 	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 	  <%= csrf_meta_tags %>
+	  <%= favicon_link_tag 'icon_screen.png' %>
 	</head>
 	<body>
 
@@ -45,14 +46,10 @@
 			      		<% end %>
 		      		</li>
 		      	<% else %>
-		      		<li>
-			      		<%= link_to new_user_registration_path do%>
-			      			<span class="glyphicon glyphicon-user"></span> Sign Up
-			      		<% end %>
-		      		</li>
+
 		        	<li>
-			        	<%= link_to new_user_session_path do %>
-			        		<span class="glyphicon glyphicon-log-in"></span> Login
+			        	<%= link_to admin_root_path do %>
+			        		<span class="glyphicon glyphicon-log-in"></span> Login Admin
 			        	<% end %>
 		        	</li>
 		      	<% end %>
@@ -80,6 +77,36 @@
 			<div class="alert alert-info" role="alert"><%= alert %></div>
 	    <% end %>
 		<%= yield %>
+
+		<footer class="footer-distributed">
+
+			<div class="footer-left">
+				
+				<p class="footer-company-name">Ebrahim-Elgaml &copy; 2015</p>
+			</div>
+			<div class="footer-center">
+
+				<div>
+					<i class="fa fa-phone"></i>
+					<p>+2 01221838455</p>
+				</div>
+				<div>
+					<i class="fa fa-envelope"></i>
+					<p><a href="mailto:support@company.com">ebrahim.m.elgaml@ieee.org</a></p>
+				</div>
+			</div>
+			<div class="footer-right">
+				<p class="footer-company-about">
+					<span>Done by Ebrahim-Elgaml</span>
+				</p>
+				<div class="footer-icons">
+					<a href="https://www.linkedin.com/profile/view?id=AAIAABU5QngB3WCgibMYW_hk28DXfIWBumsSBYk&trk=nav_responsive_tab_profile"><i class="fa fa-linkedin"></i></a>
+					<a href="https://github.com/ebrahim-elgaml"><i class="fa fa-github"></i></a>
+				</div>
+
+			</div>
+
+		</footer>
 
 	</body>
 </html>

@@ -9,6 +9,11 @@ class EmployeesController < ApplicationController
   end
 
   def show_me
-  	@cards_to_show = params[:cards]
+  	if current_user.is_employee
+      redirect_to employee_path(current_user)
+    else
+      redirect_to client_path(current_user)
+    end
   end
+  
 end
