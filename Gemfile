@@ -14,6 +14,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'momentjs-rails', '>= 2.8.1'
+gem 'groupdate'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

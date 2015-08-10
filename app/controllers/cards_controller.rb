@@ -3,10 +3,18 @@ class CardsController < ApplicationController
   def index
     if(params[:user_id])
       user = User.find(params[:user_id])
-      @cards = user.cards
+      @cards = user.cards.order(created_at: :desc)
     else
-      @cards = current_user.cards
+      if current_user.is_employee
+        @cards = current_user.cards.order(created_at: :desc)
+      else
+        @cards = current_user.cards.order(created_at: :desc).group(:taken_at, :type_id).count.to_a
+      end
     end
+  end
+
+  def show
+    redirect_to action: :edit, id: params[:id]
   end
   def create
     notices = []
@@ -21,7 +29,7 @@ class CardsController < ApplicationController
   		line = 1
   		cards.each do |c|
   			unless c.blank?
-  				added_card = Card.new(number: c, added_by_id: current_user.id, type_id: type.id)
+  				added_card = Card.new(card_number: c, added_by_id: current_user.id, type_id: type.id)
   				unless added_card.save
   					notices << "Card #{added_card.errors.full_messages.first} in Card (#{c})"
   				end
@@ -29,7 +37,7 @@ class CardsController < ApplicationController
   			end
   		end
       unless notices.count == cards.count
-        notices << "The other cards added succefully"
+        notices << "cards has been added succefully"
       end
   		redirect_to root_path, notice: notices
   	else
@@ -39,7 +47,7 @@ class CardsController < ApplicationController
         unless param.blank?
           if Card.where(type_id: t.id, is_taken: false).count >= param.to_i
             found = true
-            Card.where(type_id: t.id, is_taken: false).limit(param.to_i).update_all(is_taken:true)
+            Card.where(type_id: t.id, is_taken: false).limit(param.to_i).update_all(is_taken:true, taken_by_id: current_user.id, taken_at: Time.current)
           else
             notices << "No available cards for value #{t.value}"
           end
@@ -51,6 +59,47 @@ class CardsController < ApplicationController
   		redirect_to root_path, notice: notices
   	end
   end
+
+  def edit
+    if Card.exists?(params[:id])
+      @card = Card.find(params[:id])
+      unless @card.added_by == current_user
+        redirect_to root_path, notice: "No permission"
+      end
+    else
+      redirect_to root_path, notice: "No card available"
+    end 
+  end
+
+  def update
+    @card = Card.find(params[:id])
+    if @card.update(card_params)
+      redirect_to cards_path, notice: "updated succefully"
+    else
+      flash[:notice] = @card.errors.full_messages.first
+      render 'edit'
+    end
+  end
+
+  def destroy
+    if Card.exists?(params[:id])
+      card = Card.find(params[:id])
+      if card.added_by == current_user
+        card.destroy
+        redirect_to cards_path, notice: " Deleted succefully "
+      else
+        redirect_to root_path, notice: "No permission"
+      end
+    else
+      redirect_to root_path, notice: "No card available"
+    end
+  end
+
+  private
+    def card_params
+      params.require(:card).permit(:card_number, :type_id)
+    end
+
 
 
 end

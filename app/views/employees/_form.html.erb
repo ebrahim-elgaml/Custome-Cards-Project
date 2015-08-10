@@ -6,9 +6,14 @@
                 <div class="panel-body">
                 	<%= form_for :card, method: 'post',:url => {:controller =>'cards', :action => 'create' }  do |f|%>
                         <div class="form-group">
-                            <label for="value">Insert cards value</label><br />
+                            <label for="value"> cards value</label><br />
                             <div class="input-group">
-                                <input type="text" name="value" id="value" class="form-control">
+                                <select  data-placeholder="status" class="form-control" id = "value" name = "value" required= true>
+                                    <% Type.all.each do |t| %>
+                                        <option value="<%= t.value %>"><%= t.value %></option>
+                                    <%end%>                                  
+                                </select>
+                               <!-- <input type="text" name="value" id="value" class="form-control">-->
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span><br />
                             </div>
                             <label for="cards">Insert cards numbers</label><br />
@@ -17,7 +22,7 @@
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
                         </div>
-                        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                        <%= submit_tag "Submit", name: "submit", id: "submit" , class: "btn btn-info pull-right", data: { disable_with: "Please wait..." } %>
                     <% end %>
                 </div>
             </div>
@@ -36,7 +41,9 @@
                                     <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span><br />
                                 </div>
                             <% end %>
-                        <input type="submit" name="submit" id="submit" value="Submit" class="btn btn-info pull-right">
+                            <h1></h1>
+                            <%= submit_tag "Submit", name: "submit", id: "submit" , class: "btn btn-info pull-right", data: { disable_with: "Please wait..." } %>
+                       </div>
                     <% end %>
                 </div>
             </div>

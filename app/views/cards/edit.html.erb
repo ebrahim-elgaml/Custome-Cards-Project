@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <div class = "form-signin" >
+    <%= form_for(@card, url: card_path, method: :patch) do |f| %>
+      <h2 class="form-signin-heading">Update Card info</h2><br />
+      <div class="field">
+      <label>Card value</label>
+        <select  data-placeholder="status" class="form-control" id = "value" name = "card[type_id]" required = true>
+          <% Type.all.each do |t| %>
+            <% if t == @card.type %>
+              <option value="<%= t.id %>" selected><%= t.value %></option>
+            <% else %>
+              <option value="<%= t.id %>"><%= t.value %></option>
+            <% end %>
+          <%end%>                                  
+      </select>
+      </div><br />
+       <div class="field">
+       	<%= f.label :card_number %><br />
+        <%= f.text_field :card_number, class: "form-control", value: @card.number %>
+      </div><br />
+      <div class="actions">
+        <%= f.submit "submit", class: "btn btn-lg btn-primary btn-block" %>
+      </div>
+    <% end %>
+    <br /> 
+  </div>
+</div>

@@ -1,14 +1,14 @@
 Rails.application.routes.draw do
 
-
-  
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   devise_for :users, :skip => [:registrations]
   root  'employees#show_me'
+  get 'users/:id/edit_password' => 'users#edit_password', as: :edit_password
   resources :employees, only: [:show, :index] 
   resources :clients, only: [:show, :index]
-  resources :cards, only: [:create, :index]
+  resources :cards
+  resources :users, only: [:edit, :update] 
   #devise_scope :user do
   #  root to: "devise/sessions#new"
   #end

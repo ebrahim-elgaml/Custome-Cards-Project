@@ -1,0 +1,50 @@
+<div class="container">
+  <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>
+            Cards 
+          </h4>
+        </div>
+        <table class="table table-fixed">
+          <thead>
+            <tr>
+              <th class="col-xs-1">#</th> <th class="col-xs-3"> Card Number</th>
+              <th class="col-xs-3"> Card Value </th> <th class="col-xs-4"> is taken? </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% i = 1 %>
+            <% cards.each do |c| %>
+              <tr>
+                <td class="col-xs-1"> <%= i %> </td>
+                <td class="col-xs-3"> <%= c.number %> </td>
+                <td class="col-xs-3"> <%= c.type.value %></td>
+                <% if c.is_taken %>
+                  <td class="col-xs-4">Yes 
+                    <% if current_user = c.added_by %>
+                      <span class = "pull-right">Can not edit or delete</span>
+                    <% end %>
+                  </td>
+                <% else %>
+                  <td class="col-xs-4">No 
+                    <% if current_user = c.added_by %>
+                      <span class = "pull-right">
+                        <%= button_to "delete",  {:controller => :cards , :action => :destroy, :id => c.id }, :class => "btn btn-warning", :method => :delete %>
+                      </span>
+                      <span class = "pull-right">
+                        <%= link_to "edit",  {:controller => :cards , :action => :edit, :id => c.id }, :class => "btn btn-info" %>
+                      </span>
+                    <% end %>
+                  </td>
+                <% end %>  
+                </td>
+                
+              </tr>
+              <% i += 1 %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
