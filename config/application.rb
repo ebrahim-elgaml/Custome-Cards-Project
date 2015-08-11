@@ -17,6 +17,7 @@ module Cards
     # config.time_zone = 'Central Time (US & Canada)'
 
     config.time_zone = 'Africa/Cairo'
+    config.active_record.default_timezone = :local
     #config.active_record.default_timezone = 'Africa/Cairo'
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
