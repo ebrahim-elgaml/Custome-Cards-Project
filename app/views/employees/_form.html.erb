@@ -34,13 +34,20 @@
                 <div class="panel-body">
                     <%= form_for :card, method: 'post',:url => {:controller =>'cards', :action => 'create' }  do |f|%>
                         <div class="form-group">
-                            <% Type.all.each do |t| %>
-                                <label for="value-<%= t.id %>">Cards value <%= t.value %></label><br />
-                                <div class="input-group">
-                                    <input type="number" name="<%= t.id %>" id="value-<%= t.id %>" class="form-control">
-                                    <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span><br />
-                                </div>
-                            <% end %>
+                            <div class="input-group">
+                                <select  data-placeholder="status" class="form-control" id = "value" name = "value" required= true>
+                                    <% Type.all.each do |t| %>
+                                        <option value="<%= t.id %>"><%= t.value %></option>
+                                    <%end%>                                  
+                                </select>
+                               <!-- <input type="text" name="value" id="value" class="form-control">-->
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span><br />
+                            </div>
+                            <br />
+                            <div class="input-group">
+                                <input type="number" name="number" id="number" class="form-control" placeHolder = "Number of cards">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-pencil"></span></span><br />
+                            </div>
                             <h1></h1>
                             <%= submit_tag "Submit", name: "submit", id: "submit" , class: "btn btn-info pull-right", data: { disable_with: "Please wait..." } %>
                        </div>

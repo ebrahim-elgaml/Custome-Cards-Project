@@ -41,22 +41,18 @@ class CardsController < ApplicationController
       end
   		redirect_to root_path, notice: notices
   	else
-      found = false
-      Type.all.each do|t|
-        param = params["#{t.id}"]
-        unless param.blank?
-          if Card.where(type_id: t.id, is_taken: false).count >= param.to_i
-            found = true
-            Card.where(type_id: t.id, is_taken: false).limit(param.to_i).update_all(is_taken:true, taken_by_id: current_user.id, taken_at: Time.current)
-          else
-            notices << "No available cards for value #{t.value}"
-          end
+      if Type.exists?(params[:value])
+        number = params[:number]
+        t = Type.find(params[:value])
+        if Card.where(type_id: t.id, is_taken: false).count >= number.to_i
+          Card.where(type_id: t.id, is_taken: false).limit(number.to_i).update_all(is_taken: true, taken_by_id: current_user.id, taken_at: Time.current)
+          redirect_to cards_path, notice: "Cards has been taken succefully"
+        else
+          redirect_to root_path, notice: "No available cards for value"
         end
+      else
+        redirect_to root_path, "NO Value"
       end
-      if found
-        notices << "The other cards has been taken succefully"
-      end
-  		redirect_to root_path, notice: notices
   	end
   end
 

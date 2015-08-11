@@ -15,6 +15,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'momentjs-rails', '>= 2.8.1'
 gem 'groupdate'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -28,6 +29,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'activeadmin'
+gem  'just-datetime-picker'
+gem 'xdan-datetimepicker-rails'
+gem 'active_admin_datetimepicker'
 gem 'devise'
 gem 'pg' 
 # Use ActiveModel has_secure_password

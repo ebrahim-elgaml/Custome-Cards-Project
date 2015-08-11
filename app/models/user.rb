@@ -11,7 +11,10 @@ class User < ActiveRecord::Base
   has_one :client, :dependent => :destroy
   has_many :inserted_cards, class_name: 'Card', :foreign_key => "added_by_id"
   has_many :taken_cards, class_name: 'Card', :foreign_key => "taken_by_id"
-  after_create :set_employee_or_client
+  after_create :set_employee_or_client, :default_values
+  def default_values
+    self.is_employee ||= false
+  end
   def set_employee_or_client
   	if self.is_employee
   		Employee.create(user_id: self.id)
