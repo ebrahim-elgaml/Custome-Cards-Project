@@ -1,0 +1,17 @@
+<ul class="media-list">
+   <li class="media">
+      <% cards.each do |c| %>
+        <a class="pull-left" href="#">
+        Value: <%= Type.find(c.first.second).value %>
+        </a>
+        <div class="media-body">
+         <h4 class="media-heading">Taken at : <%= c.first.first %></h4>
+         <%  Card.select{|t| t.taken_at.to_i == c.first.first.to_i and t.type_id = c.first.second}.each do |to_show| %>
+            <%= to_show.number %><br />
+          <% end %>
+        </div>
+        ==========================================================================
+      <% end %>
+  </li>
+</ul>
+      

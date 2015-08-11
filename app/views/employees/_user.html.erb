@@ -13,11 +13,12 @@
         <div class="col-sm-3">
             <!--left col-->
             <ul class="list-group">
-                <li class="list-group-item text-muted" contenteditable="false">Profile</li>
+                <li class="list-group-item text-muted" contenteditable="false">Profile<span class = "pull-right"><%= link_to "edit",  edit_user_path %></span></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Type</strong></span> <%= user.type_show %></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">First Name</strong></span> <%= user.first_name %></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last Name</strong></span> <%= user.last_name %></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">email</strong></span> <%= user.email %></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Phone number</strong></span> <%= user.phone_number %></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined </strong></span> <%= user.created_at.strftime('%m/%d/%Y %I:%M %p') %></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last seen </strong></span> <%= user.last_sign_in_at.strftime('%m/%d/%Y %I:%M %p') %></li>
                 <% if user.is_employee %>

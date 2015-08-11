@@ -52,4 +52,32 @@ ActiveAdmin.register User do
     end
     f.actions
   end
+
+  show do
+    attributes_table do
+      row :first_name
+      row :last_name
+      row :email
+      row :phone_number
+      row :is_employee
+      row :created_at
+      row :updated_at
+    end
+    active_admin_comments
+  end
+
+  #show do
+  #  panel "User" do
+  #    table_for user do
+  #      column :email
+  #      column :first_name
+  #      column :last_name
+  #      column :phone_number
+  #      column :is_employee
+  #      column :created_at
+  #    end
+  #  end
+    #active_admin_comments
+  #end
+
 end

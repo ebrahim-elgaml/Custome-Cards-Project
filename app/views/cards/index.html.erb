@@ -1,37 +1,5 @@
-<div class="container">
-  <div class="row">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4>
-            Cards 
-          </h4>
-        </div>
-        <table class="table table-fixed">
-          <thead>
-            <tr>
-              <th class="col-xs-3">#</th> <th class="col-xs-4"> Card Number</th>
-              <th class="col-xs-3"> Card Value </th> <th class="col-xs-2"> is taken? </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% i = 1 %>
-            <% @cards.each do |c| %>
-              <tr>
-                <td class="col-xs-3"> <%= i %> </td>
-                <td class="col-xs-4"> <%= c.number %> </td>
-                <td class="col-xs-3"> <%= c.type.value %></td>
-                <% if c.is_taken %>
-                  <td class="col-xs-2">Yes</td>
-                <% else %>
-                  <td class="col-xs-2">No</td>
-                <% end %>  
-                </td>
-                
-              </tr>
-              <% i += 1 %>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-  </div>
-</div>
+<% if current_user.is_employee %>
+  <%= render partial: "cards/index_employee", locals: { cards: @cards } %>
+<% else %>
+  <%= render partial: "cards/index_client", locals: { cards: @cards } %>
+<% end %>

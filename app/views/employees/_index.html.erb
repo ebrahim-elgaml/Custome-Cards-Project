@@ -3,10 +3,12 @@
     <tr>
       <th class="col-xs-3">#</th> <th class="col-xs-6">Email</th>
       <th class="col-xs-4">
-        <% if list.first.is_employee %>
-          Total added cards
-        <% else %>
-          Total Taken cards
+        <% if list.any? %>
+          <% if list.first.is_employee %>
+            Total added cards
+          <% else %>
+            Total Taken cards
+          <% end %>
         <% end %>
       </th>
     </tr>
