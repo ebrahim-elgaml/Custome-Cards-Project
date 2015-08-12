@@ -20,7 +20,7 @@
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">email</strong></span> <%= user.email %></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Phone number</strong></span> <%= user.phone_number %></li>
                 <li class="list-group-item text-right"><span class="pull-left"><strong class="">Joined </strong></span> <%= user.created_at.strftime('%m/%d/%Y %I:%M %p') %></li>
-                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last seen </strong></span> <%= user.last_sign_in_at.strftime('%m/%d/%Y %I:%M %p') %></li>
+                <li class="list-group-item text-right"><span class="pull-left"><strong class="">Last seen </strong></span> <%= time_ago_in_words(user.last_sign_in_at)  %> Ago</li>
                 <% if user.is_employee %>
                     <li class="list-group-item text-right"><span class="pull-left"><strong class="">Total added cards </strong></span> <%= user.inserted_cards.count %></li>
                 <% else %>

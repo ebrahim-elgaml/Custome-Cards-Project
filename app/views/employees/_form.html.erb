@@ -8,7 +8,7 @@
                         <div class="form-group">
                             <label for="value"> cards value</label><br />
                             <div class="input-group">
-                                <select  data-placeholder="status" class="form-control" id = "value" name = "value" required= true>
+                                <select  data-placeholder="card-value" class="form-control" id = "value" name = "value" required= true>
                                     <% Type.all.each do |t| %>
                                         <option value="<%= t.value %>"><%= t.value %></option>
                                     <%end%>                                  

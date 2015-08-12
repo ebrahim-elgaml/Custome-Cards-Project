@@ -4,7 +4,7 @@
       <h2 class="form-signin-heading">Update Card info</h2><br />
       <div class="field">
       <label>Card value</label>
-        <select  data-placeholder="status" class="form-control" id = "value" name = "card[type_id]" required = true>
+        <select  data-placeholder="card-value" class="form-control" id = "value" name = "card[type_id]" required = true>
           <% Type.all.each do |t| %>
             <% if t == @card.type %>
               <option value="<%= t.id %>" selected><%= t.value %></option>
