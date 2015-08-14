@@ -67,9 +67,10 @@
 					<% end %>
 				<% end %>
 			<% else %>
-				<div class="alert alert-info" role="alert"><%= notice %></div>
+				<div class="alert alert-info" role="alert" id = "notice"><%= notice %></div>
 	    	<% end %>
 	    <% end %>
+	    
 	    <%if(alert)%>
 			<%if(alert.kind_of?(Array))%>
 				<% if alert.first.eql? "You need to sign in or sign up before continuing." %>

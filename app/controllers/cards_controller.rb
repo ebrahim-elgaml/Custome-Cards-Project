@@ -16,7 +16,46 @@ class CardsController < ApplicationController
   def show
     redirect_to action: :edit, id: params[:id]
   end
+  # def uploadFile
+  #   if Type.exists?(params[:type])
+  #     type = Type.find(params[:type])
+  #   else
+  #     flash[:notice] = "Cards value not available"
+  #     redirect_to root_path and return
+  #   end
+  #   file = params[:upload][:datafile].open
+  #   notices = []
+  #   inserted = false
+  #   i = 0
+  #   #file.each_line do |f|
+  #    # if i < 50
+  #      notices << file
+  #    #   i += 1
+  #    # else
+  #    #   break
+  #    # end
+  #     #notices << file.each_line.count
+  #    # unless f.blank?
+  #    #   added_card = Card.new(card_number: f, added_by_id: current_user.id, type_id: type.id)
+  #    #   unless added_card.save
+  #     #    notices << "Card #{added_card.errors.full_messages.first} in Card (#{f})"
+  #      # else
+  #      #   inserted = true
+  #      # end
+  #     #end
+  #   #end
+  #   if notices.any?
+  #     if inserted
+  #       notices << "Other cards has been added succefully"
+  #     end
+  #   else
+  #     notices << "cards has been added succefully"
+  #   end
+  #   redirect_to root_path, notice: notices
+  # end
+
   def create
+    
     notices = []
   	if current_user.is_employee
   		if Type.exists?(value: params[:value])
@@ -25,20 +64,33 @@ class CardsController < ApplicationController
         flash[:notice] = "Cards value not available"
         redirect_to root_path and return
       end
+      inserted = false
       cards = params[:cards].split(' ')
-  		line = 1
   		cards.each do |c|
   			unless c.blank?
   				added_card = Card.new(card_number: c, added_by_id: current_user.id, type_id: type.id)
-  				unless added_card.save
-  					notices << "Card #{added_card.errors.full_messages.first} in Card (#{c})"
-  				end
-  				line += 1
+  				if added_card.save
+  					inserted = true
+  				else
+            notices << "Card #{added_card.errors.full_messages.first} in Card (#{c})"
+          end
   			end
   		end
-      unless notices.count == cards.count
+      if notices.any?
+        if inserted
+          notices << "Other cards has been added succefully"
+        end
+      else
         notices << "cards has been added succefully"
       end
+      #if notices.count > 0 and notices.count != cards.count
+      #  notices << "Other cards has been added succefully"
+      #elsif notices.count == 0
+      #  notices << "cards has been added succefully"
+      #end
+      #unless notices.count == cards.count
+      #  notices << "cards has been added succefully"
+      #end
   		redirect_to root_path, notice: notices
   	else
       if Type.exists?(params[:value])

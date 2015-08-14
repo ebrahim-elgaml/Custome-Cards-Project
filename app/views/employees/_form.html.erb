@@ -1,10 +1,9 @@
-
 <% if current_user.is_employee %>
         <div class="col-sm-9" contenteditable="false" style="">
             <div class="panel panel-default">
                 <div class="panel-heading">Insert Cards</div>
                 <div class="panel-body">
-                	<%= form_for :card, method: 'post',:url => {:controller =>'cards', :action => 'create' }  do |f|%>
+                	<%= form_for :card, method: 'post',:url => {:controller =>'cards', :action => 'create' } do |f|%>
                         <div class="form-group">
                             <label for="value"> cards value</label><br />
                             <div class="input-group">
@@ -16,17 +15,34 @@
                                <!-- <input type="text" name="value" id="value" class="form-control">-->
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span><br />
                             </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="input-group">
+                                        <label for="upload_file">Select file<small>(.txt only)</small></label><br />
+                                        <input type="file" name="file" id="file" accept='.txt'>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="caption">
+                                        <h3 >OR</h3>
+                                    </div>
+                                </div>
+                            </div>
                             <label for="cards">Insert cards numbers</label><br />
                             <div class="input-group">
                                 <textarea name="cards" id="cards" class="form-control" rows="10" required= true></textarea>
                                 <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                             </div>
+                            
                         </div>
                         <%= submit_tag "Submit", name: "submit", id: "submit" , class: "btn btn-info pull-right", data: { disable_with: "Please wait..." } %>
+                        <br />
                     <% end %>
                 </div>
             </div>
         </div>
+        <%= javascript_include_tag 'file'%>
 <% else %>
         <div class="col-sm-9" contenteditable="false" style="">
             <div class="panel panel-default">

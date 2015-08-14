@@ -10,7 +10,7 @@ class Card < ActiveRecord::Base
 	validates_presence_of :card_number
 	validates :card_number, numericality: { only_integer: true }
 	#validates_numericality_of :number, :allow_blank => true
-	validates_uniqueness_of :card_number
+	validates_uniqueness_of :card_number, scope: :type_id
 
 	#after_save :set_taken_time
 	

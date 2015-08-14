@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   devise_for :users, :skip => [:registrations]
   root  'employees#show_me'
   get 'users/:id/edit_password' => 'users#edit_password', as: :edit_password
+ # post 'cards/uploadFile'
   resources :employees, only: [:show, :index] 
   resources :clients, only: [:show, :index]
   resources :cards
