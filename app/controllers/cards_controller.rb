@@ -8,7 +8,7 @@ class CardsController < ApplicationController
       if current_user.is_employee
         @cards = current_user.cards.order(created_at: :desc)
       else
-        @cards = current_user.cards.order(taken_at: :desc).group(:taken_at, :type_id, :id).count.to_a
+        @cards = current_user.cards.order(taken_at: :desc).group(:taken_at, :type_id).count.to_a
       end
     end
   end
