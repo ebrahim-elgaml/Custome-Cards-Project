@@ -1,12 +1,14 @@
+
 <ul class="media-list">
    <li class="media">
       <% cards.each do |c| %>
+        <% selected = Card.select{|t| t.taken_at.to_i == c.first.first.to_i and t.type_id = c.first.second} %>
         <a class="pull-left" href="#">
         Value: <%= Type.find(c.first.second).value %>
         </a>
         <div class="media-body">
-         <h4 class="media-heading"><small>Taken Since : <%= time_ago_in_words(c.first.first) %> Ago</small></h4>
-         <%  Card.select{|t| t.taken_at.to_i == c.first.first.to_i and t.type_id = c.first.second}.each do |to_show| %>
+         <h4 class="media-heading"><small>Taken Since : <%= time_ago_in_words(c.first.first) %> Ago( <%= selected.count %> Cards )</small></h4>
+         <%  selected.each do |to_show| %>
             <%= to_show.number %><br />
           <% end %>
         </div>

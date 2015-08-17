@@ -14,7 +14,18 @@ ActiveAdmin.register Card do
   #   permitted
   # end
   permit_params :added_by, :added_by_id, :type, :type_id, :taken_by, :taken_by_id, :card_number, :is_taken
-  
+  index do
+    selectable_column
+    id_column
+    column :card_number
+    column :added_by
+    column :taken_by
+    column :is_taken
+    column :created_at
+    column :taken_at
+    column :updated_at
+    actions
+  end
   filter :added_by
   filter :type
   filter :taken_by
